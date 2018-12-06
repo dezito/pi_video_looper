@@ -38,7 +38,7 @@ class OMXPlayer(object):
                 '--hide-pointer',
                 '--cycle-once']
 
-        #args.extend(['-D', self._imageDelay])
+        args.extend(['-D', '5'])
         args.append(image)
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
 
