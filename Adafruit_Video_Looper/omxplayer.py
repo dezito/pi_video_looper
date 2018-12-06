@@ -31,14 +31,12 @@ class OMXPlayer(object):
 
     def play_image(self, image):
         self.stop(3)
-        args = ['feh',
-                '-Z',
-                '-z',
-                '-F',
-                '--hide-pointer',
-                '--cycle-once']
+        args = ['sudo fbi',
+                '--noverbose',
+                '--autozoom'
+                ]
 
-        args.extend(['-D', '5'])
+        args.extend(['-T', '2'])
         args.append(image)
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
 
