@@ -31,7 +31,7 @@ class OMXPlayer(object):
 
     def play_image(self, image):
         self.stop(3)
-        args = ['sudo fbi',
+        args = ['sudo','fbi',
                 '--noverbose',
                 '--autozoom'
                 ]
