@@ -23,6 +23,7 @@ class OMXPlayer(object):
         self._sound = config.get('omxplayer', 'sound').lower()
         assert self._sound in ('hdmi', 'local', 'both'), 'Unknown omxplayer sound configuration value: {0} Expected hdmi, local, or both.'.format(self._sound)
         self._imageDelay = config.get('omxplayer', 'imageDelay')
+        self._feh_extra_args = config.get('omxplayer', 'feh_extra_args')
 
     def supported_extensions(self):
         """Return list of supported file extensions."""
@@ -31,7 +32,7 @@ class OMXPlayer(object):
     def play_image(self, image):
         self.stop(3)
         args = ['feh']
-	args.extend(['-Z -z -F --hide-pointer --cycle-once'])
+        args.extend(self._feh_extra_args)
         args.extend(['-D', self._imageDelay])
         args.append(image)
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
