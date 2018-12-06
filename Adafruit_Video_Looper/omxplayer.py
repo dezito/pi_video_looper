@@ -38,9 +38,11 @@ class OMXPlayer(object):
                 '--hide-pointer',
                 '--cycle-once']
 
-        args.extend(['-D', self._imageDelay])
+        #args.extend(['-D', self._imageDelay])
         args.append(image)
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
+        time.sleep(5)
+        self.stop(3)
 
     def play(self, movie, loop=False, vol=0):
         """Play the provided movie file, optionally looping it repeatedly."""
