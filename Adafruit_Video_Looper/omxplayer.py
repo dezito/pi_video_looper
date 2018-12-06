@@ -31,14 +31,14 @@ class OMXPlayer(object):
 
     def play_image(self, image):
         self.stop(3)
-        args = ['sudo','fbi',
-                '--noverbose',
-                '--autozoom',
-                '-1'
-                ]
+        args = ['feh',
+                '-Z',
+                '-z',
+                '-F',
+                '--hide-pointer',
+                '--cycle-once']
 
-        args.extend(['-T', '2'])
-        args.extend(['-t', '5'])
+        args.extend(['-D', '5'])
         args.append(image)
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
 
@@ -75,7 +75,7 @@ class OMXPlayer(object):
             # There are a couple processes used by omxplayer, so kill both
             # with a pkill command.
             subprocess.call(['pkill', '-9', 'omxplayer'])
-            subprocess.call(['pkill', '-9', 'fbi'])
+            subprocess.call(['pkill', '-9', 'feh'])
         # If a blocking timeout was specified, wait up to that amount of time
         # for the process to stop.
         start = time.time()
