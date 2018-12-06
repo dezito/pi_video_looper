@@ -22,13 +22,21 @@ class OMXPlayer(object):
         self._extra_args = config.get('omxplayer', 'extra_args').split()
         self._sound = config.get('omxplayer', 'sound').lower()
         assert self._sound in ('hdmi', 'local', 'both'), 'Unknown omxplayer sound configuration value: {0} Expected hdmi, local, or both.'.format(self._sound)
+        self._imageDelay = config.get('omxplayer', 'imageDelay')
 
     def supported_extensions(self):
         """Return list of supported file extensions."""
         return self._extensions
 
+    def play_image(self, image):
+        self.stop(3)
+        args = ['feh -Z -z -F --hide-pointer --cycle-once']
+        args.extend(['-D', self._imageDelay])
+        args.append(image)
+        self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
+
     def play(self, movie, loop=False, vol=0):
-        """Play the provided movied file, optionally looping it repeatedly."""
+        """Play the provided movie file, optionally looping it repeatedly."""
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
         args = ['omxplayer']
@@ -60,6 +68,7 @@ class OMXPlayer(object):
             # There are a couple processes used by omxplayer, so kill both
             # with a pkill command.
             subprocess.call(['pkill', '-9', 'omxplayer'])
+            subprocess.call(['pkill', '-9', 'feh'])
         # If a blocking timeout was specified, wait up to that amount of time
         # for the process to stop.
         start = time.time()
