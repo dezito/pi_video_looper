@@ -11,7 +11,7 @@ class DirectoryReader(object):
         directory on disk.
         """
         self._load_config(config)
-        self._mtimes = dict()
+        self._mtimes = {}
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
@@ -36,7 +36,6 @@ class DirectoryReader(object):
             if path in self._mtimes:
                 if self._mtimes.get(path) != os.path.getmtime(path):
                     return True
-
         return False
 
     def idle_message(self):
