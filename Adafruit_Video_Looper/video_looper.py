@@ -216,7 +216,7 @@ class VideoLooper(object):
         # Main loop to play videos in the playlist and listen for file changes.
         while self._running:
             # Load and play a new movie if nothing is playing.
-            if not self._player.is_playing() or not self._player.is_playing_image():
+            if not self._player.is_playing():
                 movie = playlist.get_next()
                 filename, file_extension = os.path.splitext(movie)
 
