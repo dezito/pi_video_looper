@@ -228,7 +228,7 @@ class VideoLooper(object):
                         img = pygame.image.load(movie)
                         self._screen.blit(img, (0,0))
                         pygame.display.flip()
-                        self._player.play_image(10)
+                        self._player.play_image("10")
 
                     else:
                         # Start playing the first available movie.
