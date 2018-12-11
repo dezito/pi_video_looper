@@ -20,6 +20,7 @@ class DirectoryReader(object):
                 continue
             self._mtimes[path] = os.path.getmtime(path)
             print(path + " " + self._mtimes[path])
+        self._length = len(self._mtimes)
 
     def search_paths(self):
         """Return a list of paths to search for files."""
@@ -32,6 +33,8 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
+        if len(self._mtimes) != self._length:
+            return True
         for path in os.listdir(self._path):
             if path in self._mtimes:
                 if self._mtimes.get(path) != os.path.getmtime(path):
