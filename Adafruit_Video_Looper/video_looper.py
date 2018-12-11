@@ -224,11 +224,10 @@ class VideoLooper(object):
                     if (file_extension == ".jpg") or (file_extension == ".png"):
                         self._blank_screen()
                         self._print('Displaying image: {0}'.format(movie))
-                        #self._player.play_image(movie)
                         img = pygame.image.load(movie)
                         self._screen.blit(img, (0,0))
                         pygame.display.flip()
-                        self._player.play_image("10")
+                        self._player.play_image()
 
                     else:
                         # Start playing the first available movie.

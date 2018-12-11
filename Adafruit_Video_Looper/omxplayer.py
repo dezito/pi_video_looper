@@ -32,9 +32,9 @@ class OMXPlayer(object):
         """Return list of supported file extensions."""
         return self._extensions
 
-    def play_image(self, image):
+    def play_image(self):
         self.stop(3)
-        args = ['sleep', image]
+        args = ['sleep', self._imageDelay]
         # args = ['',
         #         '-Z',
         #         '-z',
