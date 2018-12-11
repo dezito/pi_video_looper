@@ -50,6 +50,7 @@ class VideoLooper(object):
         self._console_output = self._config.getboolean('video_looper', 'console_output')
         # Load configured video player and file reader modules.
         self._player = self._load_player()
+        self._extensions = self._player.supported_extensions()
         self._reader = self._load_file_reader()
         # Load other configuration values.
         self._osd = self._config.getboolean('video_looper', 'osd')
@@ -75,7 +76,6 @@ class VideoLooper(object):
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()
         # Set other static internal state.
-        self._extensions = self._player.supported_extensions()
         self._small_font = pygame.font.Font(None, 50)
         self._big_font   = pygame.font.Font(None, 250)
         self._running    = True
