@@ -95,7 +95,7 @@ class VideoLooper(object):
         """Load the configured file reader and return an instance of it."""
         module = self._config.get('video_looper', 'file_reader')
         return importlib.import_module('.' + module, 'Adafruit_Video_Looper') \
-            .create_file_reader(self._config)
+            .create_file_reader(self._config, self._extensions)
 
     def _is_number(iself, s):
         try:

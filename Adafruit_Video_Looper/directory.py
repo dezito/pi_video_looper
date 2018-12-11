@@ -3,23 +3,21 @@
 # License: GNU GPLv2, see LICENSE.txt
 import os
 
-
 class DirectoryReader(object):
 
-    def __init__(self, config):
+    def __init__(self, config, extensions):
         """Create an instance of a file reader that just reads a single
         directory on disk.
         """
         self._mtimes = {}
+        self._extensions = extensions
         self._load_config(config)
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
-        for path in self._path:
-            if not os.path.exists(path) or not os.path.isdir(path):
-                continue
+        for path in os.listdir(self._path):
             self._mtimes[path] = os.path.getmtime(path)
-            print(path)
+            print(path + " " + self._mtimes[path])
 
     def search_paths(self):
         """Return a list of paths to search for files."""
@@ -32,7 +30,7 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
-        for path in self._path():
+        for path in os.listdir(self._path()):
             if path in self._mtimes:
                 if self._mtimes.get(path) != os.path.getmtime(path):
                     return True
@@ -43,6 +41,6 @@ class DirectoryReader(object):
         return 'No files found in {0}'.format(self._path)
 
 
-def create_file_reader(config):
+def create_file_reader(config, extensions):
     """Create new file reader based on reading a directory on disk."""
-    return DirectoryReader(config)
+    return DirectoryReader(config, extensions)

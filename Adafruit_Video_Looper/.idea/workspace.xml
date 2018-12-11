@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1149f181-7b5d-4a16-874e-6a36d9e7416f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_looper.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_looper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +16,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/video_looper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1068">
-              <caret line="110" column="26" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="26" />
+            <state relative-caret-position="281">
+              <caret line="123" column="36" selection-start-line="123" selection-start-column="34" selection-end-line="123" selection-end-column="36" />
+              <folding>
+                <element signature="e#98#117#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -24,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/directory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+            <state relative-caret-position="210">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -59,8 +63,13 @@
       <find>movie</find>
       <find>directory</find>
       <find>build_pla</find>
-      <find>path</find>
       <find>returncode</find>
+      <find>path</find>
+      <find>Directory</find>
+      <find>reader</find>
+      <find>create_file_reader</find>
+      <find>re.</find>
+      <find>re</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,12 +138,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544128840241</updated>
-      <workItem from="1544128841631" duration="10633000" />
+      <workItem from="1544128841631" duration="11681000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10633000" />
+    <option name="totallyTimeSpent" value="11681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="31" width="1566" height="1011" extended-state="0" />
@@ -174,13 +183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/video_looper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1068">
-          <caret line="110" column="26" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/omxplayer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -191,10 +193,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/video_looper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="123" column="36" selection-start-line="123" selection-start-column="34" selection-end-line="123" selection-end-column="36" />
+          <folding>
+            <element signature="e#98#117#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/directory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
