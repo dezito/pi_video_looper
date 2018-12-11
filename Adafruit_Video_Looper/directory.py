@@ -42,6 +42,9 @@ class DirectoryReader(object):
         """Return a message to display when idle and no files are found."""
         return 'No files found in {0}'.format(self._path)
 
+    def mtimes(self):
+        return self._mtimes
+
 
 def create_file_reader(config, extensions):
     """Create new file reader based on reading a directory on disk."""

@@ -219,7 +219,8 @@ class VideoLooper(object):
             if not self._player.is_playing():
                 movie = playlist.get_next()
                 filename, file_extension = os.path.splitext(movie)
-
+                for mtime in self._reader.mtimes():
+                    self._print(mtime)
                 if movie is not None:
                     if (file_extension == ".jpg") or (file_extension == ".png"):
                         self._blank_screen()
