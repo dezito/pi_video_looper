@@ -32,7 +32,7 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
-        for path in os.listdir(self._path()):
+        for path in os.listdir(self._path):
             if path in self._mtimes:
                 if self._mtimes.get(path) != os.path.getmtime(path):
                     return True
