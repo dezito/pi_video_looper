@@ -10,8 +10,8 @@ class DirectoryReader(object):
         """Create an instance of a file reader that just reads a single
         directory on disk.
         """
-        self._load_config(config)
         self._mtimes = {}
+        self._load_config(config)
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
