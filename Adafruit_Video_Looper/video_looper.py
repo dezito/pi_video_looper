@@ -241,6 +241,7 @@ class VideoLooper(object):
                 self._player.stop(3)  # Up to 3 second delay waiting for old 
                                       # player to stop.
                 # Rebuild playlist and show countdown again (if OSD enabled).
+                self._reader.reset()
                 playlist = self._build_playlist()
                 self._prepare_to_run_playlist(playlist)
             # Event handling for key press, if keyboard control is enabled

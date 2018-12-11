@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1149f181-7b5d-4a16-874e-6a36d9e7416f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_looper.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_looper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/video_looper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="250" column="56" lean-forward="true" selection-start-line="250" selection-start-column="56" selection-end-line="250" selection-end-column="56" />
+            <state relative-caret-position="221">
+              <caret line="236" column="80" lean-forward="true" selection-start-line="236" selection-start-column="80" selection-end-line="236" selection-end-column="81" />
               <folding>
                 <element signature="e#98#117#0" expanded="true" />
               </folding>
@@ -24,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/directory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+            <state relative-caret-position="212">
+              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -79,8 +80,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/omxplayer.py" />
-        <option value="$PROJECT_DIR$/video_looper.py" />
         <option value="$PROJECT_DIR$/directory.py" />
+        <option value="$PROJECT_DIR$/video_looper.py" />
       </list>
     </option>
   </component>
@@ -138,12 +139,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544128840241</updated>
-      <workItem from="1544128841631" duration="12602000" />
+      <workItem from="1544128841631" duration="14073000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12602000" />
+    <option name="totallyTimeSpent" value="14073000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="31" width="1566" height="1011" extended-state="0" />
@@ -193,20 +194,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/video_looper.py">
+    <entry file="file://$PROJECT_DIR$/directory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="250" column="56" lean-forward="true" selection-start-line="250" selection-start-column="56" selection-end-line="250" selection-end-column="56" />
-          <folding>
-            <element signature="e#98#117#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="212">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/directory.py">
+    <entry file="file://$PROJECT_DIR$/video_looper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+        <state relative-caret-position="221">
+          <caret line="236" column="80" lean-forward="true" selection-start-line="236" selection-start-column="80" selection-end-line="236" selection-end-column="81" />
+          <folding>
+            <element signature="e#98#117#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

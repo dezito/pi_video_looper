@@ -1,7 +1,21 @@
 # Copyright 2015 Adafruit Industries.
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
-import os
+import pyinotify
+
+
+class MyEventHandler(pyinotify.ProcessEvent):
+    ischanged = False
+
+    def process_IN_CREATE(self, event):
+        self.ischanged = True
+
+    def process_IN_DELETE(self, event):
+        self.ischanged = True
+
+    def process_IN_MODIFY(self, event):
+        self.ischanged = True
+
 
 class DirectoryReader(object):
 
@@ -9,18 +23,22 @@ class DirectoryReader(object):
         """Create an instance of a file reader that just reads a single
         directory on disk.
         """
-        self._mtimes = {}
-        self._extensions = extensions
         self._load_config(config)
+        self._ischanged = False
+        # watch manager
+        self.wm = pyinotify.WatchManager()
+        self.mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE | pyinotify.IN_MODIFY
+        self.wm.add_watch(self._path, self.mask)
+
+        # event handler
+        self.eh = MyEventHandler()
+
+        # notifier
+        self.notifier = pyinotify.ThreadNotifier(self.wm, self.eh)
+        self.notifier.start()
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
-        for path in os.listdir(self._path):
-            if not os.path.exists(path) or not os.path.isdir(path):
-                continue
-            self._mtimes[path] = os.path.getmtime(path)
-            print(path + " " + self._mtimes[path])
-        self._length = len(self._mtimes)
 
     def search_paths(self):
         """Return a list of paths to search for files."""
@@ -33,20 +51,16 @@ class DirectoryReader(object):
         # true if new files are added/removed from the directory.  This is 
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
-        if len(self._mtimes) != self._length:
-            return True
-        for path in os.listdir(self._path):
-            if path in self._mtimes:
-                if self._mtimes.get(path) != os.path.getmtime(path):
-                    return True
-        return False
+
+        return self.eh.ischanged
 
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
         return 'No files found in {0}'.format(self._path)
 
-    def mtimes(self):
-        return self._mtimes
+    def reset(self):
+        self.eh.ischanged = False
+        return
 
 
 def create_file_reader(config, extensions):
