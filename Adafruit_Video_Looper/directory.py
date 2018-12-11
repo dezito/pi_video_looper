@@ -11,7 +11,7 @@ class DirectoryReader(object):
         directory on disk.
         """
         self._load_config(config)
-        self._mtimes = {}
+        self._mtimes = None
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
