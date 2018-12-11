@@ -34,7 +34,7 @@ class DirectoryReader(object):
         self.eh = MyEventHandler()
 
         # notifier
-        self.notifier = pyinotify.ThreadNotifier(self.wm, self.eh)
+        self.notifier = pyinotify.ThreadedNotifier(self.wm, self.eh)
         self.notifier.start()
 
     def _load_config(self, config):
