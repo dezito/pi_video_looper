@@ -16,6 +16,8 @@ class DirectoryReader(object):
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
         for path in os.listdir(self._path):
+            if not os.path.exists(path) or not os.path.isdir(path):
+                continue
             self._mtimes[path] = os.path.getmtime(path)
             print(path + " " + self._mtimes[path])
 
