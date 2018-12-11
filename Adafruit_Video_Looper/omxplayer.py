@@ -14,14 +14,17 @@ class OMXPlayer(object):
         """
         self._process = None
         self._load_config(config)
+        self._playing_image = False
 
     def _load_config(self, config):
         self._extensions = config.get('omxplayer', 'extensions') \
-                                 .translate(None, ' \t\r\n.') \
-                                 .split(',')
+            .translate(None, ' \t\r\n.') \
+            .split(',')
         self._extra_args = config.get('omxplayer', 'extra_args').split()
         self._sound = config.get('omxplayer', 'sound').lower()
-        assert self._sound in ('hdmi', 'local', 'both'), 'Unknown omxplayer sound configuration value: {0} Expected hdmi, local, or both.'.format(self._sound)
+        assert self._sound in ('hdmi', 'local',
+                               'both'), 'Unknown omxplayer sound configuration value: {0} Expected hdmi, local, or both.'.format(
+            self._sound)
         self._imageDelay = config.get('omxplayer', 'imageDelay')
         self._feh_extra_args = config.get('omxplayer', 'feh_extra_args')
 
@@ -31,15 +34,15 @@ class OMXPlayer(object):
 
     def play_image(self, image):
         self.stop(3)
-        args = ['feh',
-                '-Z',
-                '-z',
-                '-F',
-                '--hide-pointer',
-                '--cycle-once']
+        args = ['sleep', image]
+        # args = ['',
+        #         '-Z',
+        #         '-z',
+        #         '-F',
+        #         '--hide-pointer',
+        #         '--cycle-once']
 
-        args.extend(['-D', '5'])
-        args.append(image)
+        # args.extend(['-D', '5'])
         self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
 
     def play(self, movie, loop=False, vol=0):
@@ -48,16 +51,19 @@ class OMXPlayer(object):
         # Assemble list of arguments.
         args = ['omxplayer']
         args.extend(['-o', self._sound])  # Add sound arguments.
-        args.extend(self._extra_args)     # Add extra arguments from config.
+        args.extend(self._extra_args)  # Add extra arguments from config.
         if vol is not 0:
             args.extend(['--vol', str(vol)])
         if loop:
-            args.append('--loop')         # Add loop parameter if necessary.
-        args.append(movie)                # Add movie file path.
+            args.append('--loop')  # Add loop parameter if necessary.
+        args.append(movie)  # Add movie file path.
         # Run omxplayer process and direct standard output to /dev/null.
         self._process = subprocess.Popen(args,
                                          stdout=open(os.devnull, 'wb'),
                                          close_fds=True)
+
+    def is_playing_image(self):
+        return self._playing_image
 
     def is_playing(self):
         """Return true if the video player is running, false otherwise."""

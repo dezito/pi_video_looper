@@ -216,20 +216,23 @@ class VideoLooper(object):
         # Main loop to play videos in the playlist and listen for file changes.
         while self._running:
             # Load and play a new movie if nothing is playing.
-            if not self._player.is_playing():
+            if not self._player.is_playing() or not self._player.is_playing_image():
                 movie = playlist.get_next()
                 filename, file_extension = os.path.splitext(movie)
 
                 if movie is not None:
                     if (file_extension == ".jpg") or (file_extension == ".png"):
+                        self._blank_screen()
                         self._print('Displaying image: {0}'.format(movie))
                         #self._player.play_image(movie)
                         img = pygame.image.load(movie)
                         self._screen.blit(img, (0,0))
                         pygame.display.flip()
-                        time.sleep(5)
+                        self._player.play_image(10)
+
                     else:
                         # Start playing the first available movie.
+                        self._blank_screen()
                         self._print('Playing movie: {0}'.format(movie))
                         self._player.play(movie, loop=playlist.length() == 1, vol=self._sound_vol)
             # Check for changes in the file search path (like USB drives added)
