@@ -16,6 +16,11 @@ class MyEventHandler(pyinotify.ProcessEvent):
     def process_IN_MODIFY(self, event):
         self.ischanged = True
 
+    def process_IN_MOVED_TO(self, event):
+        self.ischanged = True
+
+    def process_IN_MOVED_FROM(self, event):
+        self.ischanged = True
 
 class DirectoryReader(object):
 
@@ -27,7 +32,7 @@ class DirectoryReader(object):
         self._ischanged = False
         # watch manager
         self.wm = pyinotify.WatchManager()
-        self.mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE | pyinotify.IN_MODIFY
+        self.mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE | pyinotify.IN_MODIFY | pyinotify.IN_MOVED_TO | pyinotify.IN_MOVED_FROM
         self.wm.add_watch(self._path, self.mask)
 
         # event handler
