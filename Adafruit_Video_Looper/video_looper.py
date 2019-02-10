@@ -233,7 +233,7 @@ class VideoLooper(object):
                         imgscale = pygame.transform.scale(img, (cw, ch))
                         isw, ish = imgscale.get_size()
                         #self._screen.fill(self._bgcolor)
-                        self._screen.blit(img, (sw/2-isw/2, sh/2-ish/2))
+                        self._screen.blit(imgscale, (sw/2-isw/2, sh/2-ish/2))
                         pygame.display.flip()
                         self._player.play_image()
 
