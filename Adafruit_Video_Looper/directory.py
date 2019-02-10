@@ -2,7 +2,20 @@
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
 import pyinotify
+import socket
+import fcntl
+import struct
 
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        return socket.inet_ntoa(fcntl.ioctl(
+            s.fileno(),
+            0x8915, #SIOCGIFADDR
+            struct.pack('256s', ifname[:15])
+        )[20:24])
+    except:
+        return None
 
 class MyEventHandler(pyinotify.ProcessEvent):
     ischanged = False
@@ -44,6 +57,8 @@ class DirectoryReader(object):
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
+        #Get Show IP from config	
+        self._show_ip = config.getint('video_looper', 'show_ip')
 
     def search_paths(self):
         """Return a list of paths to search for files."""
@@ -65,7 +80,13 @@ class DirectoryReader(object):
 
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
-        return 'No files found in {0}'.format(self._path)
+        if get_ip_address('eth0') is None:
+            return 'No files found in {0}'.format(self._path)
+        elif self._show_ip() is false:
+            return 'No files found in {0}'.format(self._path)
+        else:
+            return 'No files found in {0}'.format(self._path) + ' (IP: ' + (get_ip_address('eth0')) + ')'
+        #return 'No files found in {0}'.format(self._path)
 
     def reset(self):
         self.eh.ischanged = False
