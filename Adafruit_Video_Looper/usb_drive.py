@@ -36,8 +36,6 @@ class USBDriveReader(object):
     def _load_config(self, config):
         self._mount_path = config.get('usb_drive', 'mount_path')
         self._readonly = config.getboolean('usb_drive', 'readonly')
-        #Get Show IP from config
-        self._show_ip = self.config.getint('video_looper', 'show_ip')
 
     def search_paths(self):
         """Return a list of paths to search for files. Will return a list of all
@@ -59,8 +57,6 @@ class USBDriveReader(object):
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
         if get_ip_address('eth0') is None:
-            return 'Insert USB Drive with compatible movies.'
-        elseif self._show_ip() is false:
             return 'Insert USB Drive with compatible movies.'
         else:
             return 'Insert USB drive with compatible movies. (IP: ' + (get_ip_address('eth0')) + ')'
