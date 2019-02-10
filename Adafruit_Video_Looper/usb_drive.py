@@ -44,11 +44,11 @@ class USBDriveReader(object):
         mounted USB drives.
         """
         self._mounter.mount_all()
-        vid_dirs = glob.glob(self._mount_path + '*')
-        vid_dirs.extend(glob.glob(self._mount_path + '*/*'))
-        # print vid_dirs
-        return vid_dirs
-        #return glob.glob(self._mount_path + '*')
+        #vid_dirs = glob.glob(self._mount_path + '*')
+        #vid_dirs.extend(glob.glob(self._mount_path + '*/*'))
+        ## print vid_dirs
+        #return vid_dirs
+        return glob.glob(self._mount_path + '*')
 
     def is_changed(self):
         """Return true if the file search paths have changed, like when a new
