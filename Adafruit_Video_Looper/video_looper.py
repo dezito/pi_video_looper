@@ -230,24 +230,24 @@ class VideoLooper(object):
                         ix,iy = img.get_size()
                         if ix > iy:
                             # fit to width
-                            scale_factor = sh/float(ix)
+                            scale_factor = sw/float(ix)
                             sy = scale_factor * iy
-                            if sy > sw:
-                                scale_factor = sw/float(iy)
+                            if sy > sh:
+                                scale_factor = sh/float(iy)
                                 sx = scale_factor * ix
-                                sy = sw
+                                sy = sh
                             else:
-                                sx = sh
+                                sx = sw
                         else:
                             # fit to height
-                            scale_factor = sw/float(iy)
+                            scale_factor = sh/float(iy)
                             sx = scale_factor * ix
-                            if sx > sh:
-                                scale_factor = sh/float(ix)
-                                sx = sh
+                            if sx > sw:
+                                scale_factor = sw/float(ix)
+                                sx = sw
                                 sy = scale_factor * iy
                             else:
-                                sy = sw
+                                sy = sh
 
                         img = pygame.transform.scale(img, (sx,sy))
                         iw, ih = img.get_size()
