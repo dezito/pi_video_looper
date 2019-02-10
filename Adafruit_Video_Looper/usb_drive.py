@@ -7,9 +7,6 @@ import socket
 import fcntl
 import struct
 
-        #Get Show IP from config
-        self._show_ip = self._config.getint('video_looper', 'show_ip')
-
 from usb_drive_mounter import USBDriveMounter
 
 def get_ip_address(ifname):
@@ -60,8 +57,6 @@ class USBDriveReader(object):
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
         if get_ip_address('eth0') is None:
-            return 'Insert USB Drive with compatible movies.'
-        elif self._show_ip() is false:
             return 'Insert USB Drive with compatible movies.'
         else:
             return 'Insert USB drive with compatible movies. (IP: ' + (get_ip_address('eth0')) + ')'

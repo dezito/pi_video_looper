@@ -6,9 +6,6 @@ import socket
 import fcntl
 import struct
 
-        #Get Show IP from config
-        self._show_ip = self._config.getint('video_looper', 'show_ip')
-
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -82,8 +79,6 @@ class DirectoryReader(object):
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
         if get_ip_address('eth0') is None:
-            return 'No files found in {0}'.format(self._path)
-        elif self._show_ip() is false:
             return 'No files found in {0}'.format(self._path)
         else:
             return 'No files found in {0}'.format(self._path) + ' (IP: ' + (get_ip_address('eth0')) + ')'
