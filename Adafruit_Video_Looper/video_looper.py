@@ -228,27 +228,30 @@ class VideoLooper(object):
                         img = pygame.image.load(movie)
                         #imgscale = aspect_scale(img, (sw, sh))
                         ix,iy = img.get_size()
-                        if ix > iy:
-                            # fit to width
-                            scale_factor = sw/float(ix)
-                            sy = scale_factor * iy
-                            if sy > sh:
+                        if ix > sw or iy > sh:
+                            if ix > iy:
+                                # fit to width
+                                scale_factor = sw/float(ix)
+                                sy = scale_factor * iy
+                                if sy > sh:
+                                    scale_factor = sh/float(iy)
+                                    sx = scale_factor * ix
+                                    sy = sh
+                                else:
+                                    sx = sw
+                            else:
+                                # fit to height
                                 scale_factor = sh/float(iy)
                                 sx = scale_factor * ix
-                                sy = sh
-                            else:
-                                sx = sw
+                                if sx > sw:
+                                    scale_factor = sw/float(ix)
+                                    sx = sw
+                                    sy = scale_factor * iy
+                                else:
+                                    sy = sh
                         else:
-                            # fit to height
-                            scale_factor = sh/float(iy)
-                            sx = scale_factor * ix
-                            if sx > sw:
-                                scale_factor = sw/float(ix)
-                                sx = sw
-                                sy = scale_factor * iy
-                            else:
-                                sy = sh
-
+                            sx = ix
+                            sy = iy
                         img = pygame.transform.scale(img, (sx,sy))
                         iw, ih = img.get_size()
                         #self._screen.fill(self._bgcolor)
