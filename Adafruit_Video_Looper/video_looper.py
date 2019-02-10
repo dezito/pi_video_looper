@@ -13,6 +13,32 @@ import pygame
 
 from model import Playlist
 
+def aspect_scale(img,(bx,by)):
+    """ Scales 'img' to fit into box bx/by.
+    This method will retain the original image's aspect ratio """
+    ix,iy = img.get_size()
+    if ix > iy:
+        # fit to width
+        scale_factor = bx/float(ix)
+        sy = scale_factor * iy
+        if sy > by:
+            scale_factor = by/float(iy)
+            sx = scale_factor * ix
+            sy = by
+        else:
+            sx = bx
+    else:
+        # fit to height
+        scale_factor = by/float(iy)
+        sx = scale_factor * ix
+        if sx > bx:
+            scale_factor = bx/float(ix)
+            sx = bx
+            sy = scale_factor * iy
+        else:
+            sy = by
+
+    return pygame.transform.scale(img, (sx,sy))
 
 # Basic video looper architecure:
 #
@@ -105,32 +131,6 @@ class VideoLooper(object):
             return True
         except ValueError:
             return False
-    def _aspect_scale(self, img,(bx,by)):
-        """ Scales 'img' to fit into box bx/by.
-        This method will retain the original image's aspect ratio """
-        ix,iy = img.get_size()
-        if ix > iy:
-            # fit to width
-            scale_factor = bx/float(ix)
-            sy = scale_factor * iy
-            if sy > by:
-                scale_factor = by/float(iy)
-                sx = scale_factor * ix
-                sy = by
-            else:
-                sx = bx
-        else:
-            # fit to height
-            scale_factor = by/float(iy)
-            sx = scale_factor * ix
-            if sx > bx:
-                scale_factor = bx/float(ix)
-                sx = bx
-                sy = scale_factor * iy
-            else:
-                sy = by
-
-        return pygame.transform.scale(img, (sx,sy))
 
     def _build_playlist(self):
         """Search all the file reader paths for movie files with the provided
@@ -252,8 +252,9 @@ class VideoLooper(object):
                         self._blank_screen()
                         self._print('Displaying image: {0}'.format(movie))
                         sw, sh = self._screen.get_size()
-                        img = self._aspect_scale(pygame.image.load(movie),(sw, sh))
-                        iw, ih = img.get_size()
+                        img = pygame.image.load(movie)
+                        imgscale = aspect_scale(img, (sw, sh))
+                        iw, ih = imgscale.get_size()
                         #self._screen.fill(self._bgcolor)
                         self._screen.blit(img, (sw/2-iw/2, sh/2-ih/2))
                         pygame.display.flip()
