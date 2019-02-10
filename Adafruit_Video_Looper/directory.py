@@ -47,7 +47,11 @@ class DirectoryReader(object):
 
     def search_paths(self):
         """Return a list of paths to search for files."""
-        return [self._path]
+        vid_dirs = glob.glob(self._path + '*')
+        vid_dirs.extend(glob.glob(self._path + '*/*'))
+        # print vid_dirs
+        return vid_dirs
+        #return [self._path]
 
     def is_changed(self):
         """Return true if the file search paths have changed."""

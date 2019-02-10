@@ -3,8 +3,25 @@
 # License: GNU GPLv2, see LICENSE.txt
 import glob
 
+import socket
+import fcntl
+import struct
+
+        #Get Show IP from config
+        self._show_ip = self._config.getint('video_looper', 'show_ip')
+
 from usb_drive_mounter import USBDriveMounter
 
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        return socket.inet_ntoa(fcntl.ioctl(
+            s.fileno(),
+            0x8915, #SIOCGIFADDR
+            struct.pack('256s', ifname[:15])
+        )[20:24])
+    except:
+        return None
 
 class USBDriveReader(object):
 
@@ -28,7 +45,11 @@ class USBDriveReader(object):
         mounted USB drives.
         """
         self._mounter.mount_all()
-        return glob.glob(self._mount_path + '*')
+        vid_dirs = glob.glob(self._mount_path + '*')
+        vid_dirs.extend(glob.glob(self._mount_path + '*/*'))
+        # print vid_dirs
+        return vid_dirs
+        #return glob.glob(self._mount_path + '*')
 
     def is_changed(self):
         """Return true if the file search paths have changed, like when a new
@@ -38,7 +59,13 @@ class USBDriveReader(object):
 
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
-        return 'Insert USB drive with compatible movies.'
+        if get_ip_address('eth0') is None:
+            return 'Insert USB Drive with compatible movies.'
+        elseif self._show_ip() is false:
+            return 'Insert USB Drive with compatible movies.'
+        else:
+            return 'Insert USB drive with compatible movies. (IP: ' + (get_ip_address('eth0')) + ')'
+        #return 'Insert USB drive with compatible movies.'
 
 
 def create_file_reader(config):
