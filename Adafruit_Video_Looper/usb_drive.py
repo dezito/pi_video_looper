@@ -7,6 +7,9 @@ import socket
 import fcntl
 import struct
 
+        #Get Show IP from config
+        self._show_ip = self._config.getint('video_looper', 'show_ip')
+
 from usb_drive_mounter import USBDriveMounter
 
 def get_ip_address(ifname):
@@ -36,8 +39,6 @@ class USBDriveReader(object):
     def _load_config(self, config):
         self._mount_path = config.get('usb_drive', 'mount_path')
         self._readonly = config.getboolean('usb_drive', 'readonly')
-        #Get Show IP from config	
-        self._show_ip = config.getint('video_looper', 'show_ip')
 
     def search_paths(self):
         """Return a list of paths to search for files. Will return a list of all

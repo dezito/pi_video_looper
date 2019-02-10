@@ -6,6 +6,9 @@ import socket
 import fcntl
 import struct
 
+        #Get Show IP from config
+        self._show_ip = self._config.getint('video_looper', 'show_ip')
+
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -57,8 +60,6 @@ class DirectoryReader(object):
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
-        #Get Show IP from config	
-        self._show_ip = config.getint('video_looper', 'show_ip')
 
     def search_paths(self):
         """Return a list of paths to search for files."""
