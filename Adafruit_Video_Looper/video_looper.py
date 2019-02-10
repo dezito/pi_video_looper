@@ -65,7 +65,7 @@ class VideoLooper(object):
                                              .translate(None, ',') \
                                              .split())
        	#Get seconds for countdown from config
-        self._countdown_time = self._config.getint('video_looper', 'countdown_time')
+        #self._countdown_time = self._config.getint('video_looper', 'countdown_time')
         # Load sound volume file name value
         self._sound_vol_file = self._config.get('omxplayer', 'sound_vol_file');
         # default value to 0 millibels (omxplayer)
@@ -150,7 +150,7 @@ class VideoLooper(object):
             font = self._small_font
         return font.render(message, True, self._fgcolor, self._bgcolor)
 
-    def _animate_countdown(self, playlist):
+    def _animate_countdown(self, playlist, seconds=10):
         """Print text with the number of loaded movies and a quick countdown
         message if the on screen display is enabled.
         """
@@ -166,7 +166,7 @@ class VideoLooper(object):
         label1 = self._render_text(message + ' Starting playback in:')
         l1w, l1h = label1.get_size()
         sw, sh = self._screen.get_size()
-        for i in range(self._countdown_time, 0, -1):
+        for i in range(seconds, 0, -1):
             # Each iteration of the countdown rendering changing text.
             label2 = self._render_text(str(i), self._big_font)
             l2w, l2h = label2.get_size()

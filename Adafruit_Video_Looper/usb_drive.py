@@ -3,22 +3,22 @@
 # License: GNU GPLv2, see LICENSE.txt
 import glob
 
-import socket
-import fcntl
-import struct
+#import socket
+#import fcntl
+#import struct
 
 from usb_drive_mounter import USBDriveMounter
 
-def get_ip_address(ifname):
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        return socket.inet_ntoa(fcntl.ioctl(
-            s.fileno(),
-            0x8915, #SIOCGIFADDR
-            struct.pack('256s', ifname[:15])
-        )[20:24])
-    except:
-        return None
+#def get_ip_address(ifname):
+#    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#    try:
+#        return socket.inet_ntoa(fcntl.ioctl(
+#            s.fileno(),
+#            0x8915, #SIOCGIFADDR
+#            struct.pack('256s', ifname[:15])
+#        )[20:24])
+#    except:
+#        return None
 
 class USBDriveReader(object):
 
@@ -56,11 +56,11 @@ class USBDriveReader(object):
 
     def idle_message(self):
         """Return a message to display when idle and no files are found."""
-        if get_ip_address('eth0') is None:
-            return 'Insert USB Drive with compatible movies.'
-        else:
-            return 'Insert USB drive with compatible movies. (IP: ' + (get_ip_address('eth0')) + ')'
-        #return 'Insert USB drive with compatible movies.'
+        #if get_ip_address('eth0') is None:
+        #    return 'Insert USB Drive with compatible movies.'
+        #else:
+        #    return 'Insert USB drive with compatible movies. (IP: ' + (get_ip_address('eth0')) + ')'
+        return 'Insert USB drive with compatible movies.'
 
 
 def create_file_reader(config):
