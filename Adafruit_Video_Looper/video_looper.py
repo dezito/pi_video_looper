@@ -227,19 +227,29 @@ class VideoLooper(object):
                         sw, sh = self._screen.get_size()
                         img = pygame.image.load(movie)
                         #imgscale = aspect_scale(img, (sw, sh))
-                        if img.get_width() > img.get_height():
-                            img = pygame.transform.rotate(img, 90)
-                        if img.get_width() > sw:
-                            ix, iy = img.get_size()
-                            scale_factor = sh/float(iy)
+                        ix,iy = img.get_size()
+                        if ix > iy:
+                            # fit to width
+                            scale_factor = sh/float(ix)
+                            sy = scale_factor * iy
+                            if sy > sw:
+                                scale_factor = sw/float(iy)
+                                sx = scale_factor * ix
+                                sy = sw
+                            else:
+                                sx = sh
+                        else:
+                            # fit to height
+                            scale_factor = sw/float(iy)
                             sx = scale_factor * ix
-                            if sx > sw:
-                                scale_factor = sw/float(ix)
-                                sx = sw
+                            if sx > sh:
+                                scale_factor = sh/float(ix)
+                                sx = sh
                                 sy = scale_factor * iy
                             else:
-                                sy = sh
-                            img = pygame.transform.scale(img, (int(sx), int(sy)))
+                                sy = sw
+
+                        img = pygame.transform.scale(img, (sx,sy))
                         iw, ih = img.get_size()
                         #self._screen.fill(self._bgcolor)
                         self._screen.blit(img, (sw/2-iw/2, sh/2-ih/2))
