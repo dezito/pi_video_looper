@@ -92,5 +92,8 @@ echo "# Force FullHD 1920x1080" >> /boot/config.txt
 echo "hdmi_group=1" >> /boot/config.txt
 echo "hdmi_mode=16" >> /boot/config.txt
 
-echo "Run command 'sudo passwd pi' & 'sudo smbpasswd -a pi' to change passwords"
+echo "Run the following commands:"
+echo "sudo passwd pi"
+echo "sudo smbpasswd -a pi"
+echo "sudo /etc/init.d/samba restart"
 echo "Finished!"
