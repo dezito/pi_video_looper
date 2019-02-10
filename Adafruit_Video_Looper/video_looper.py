@@ -225,11 +225,11 @@ class VideoLooper(object):
                     if (file_extension == ".jpg") or (file_extension == ".png"):
                         self._blank_screen()
                         self._print('Displaying image: {0}'.format(movie))
-                        img = pygame.image.load(movie)
-                        lw, lh = img.get_size()
                         sw, sh = self._screen.get_size()
+                        img = pygame.transform.scale(pygame.image.load(movie), (sw, sh)) 
+                        lw, lh = img.get_size()
                         #self._screen.fill(self._bgcolor)
-                        self._screen.blit(pygame.transform.scale(img, (sw, sh)), (sw/2-lw/2, sh/2-lh/2))
+                        self._screen.blit((img, (sw/2-lw/2, sh/2-lh/2))
                         pygame.display.flip()
                         self._player.play_image()
 
